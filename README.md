@@ -22,7 +22,7 @@ $ slack send "Clear for takeoff" "status"
 $ slack send "Abort mission!" "errors"
 ```
 
-All stored in a handy config file;
+All stored in a handy config file:
 
 ```bash
 $ slack config
@@ -33,4 +33,12 @@ Configurations
 hooks
 -----
 default : https://hooks.slack.com/...
+status : https://hooks.slack.com/...
+errors: https://hooks.slack.com/...
 ```
+
+## Installation
+
+1) Clone the repository
+2) Build the source `$ python setup.py build`
+3) Install `$ python setup.py install`
