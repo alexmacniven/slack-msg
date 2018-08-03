@@ -32,7 +32,7 @@ def main():
     """Entry to the CLI"""
     # Import the commands and let docopt parse the options and args
     # from the CLI.
-    import slack-msg.com as com
+    import slack.com as com
     options = docopt(__doc__, version=__version__)
     # Each option has passed has the name of the option as 'key' and
     # whether it was passed (true/false) as 'val'.
