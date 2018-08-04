@@ -2,7 +2,7 @@
 slack
 
 Usage:
-  slack config [--setup] [(--add <hook> <url>)] [(--remove <hook>)]
+  slack config [(--add <hook> <url>)] [(--remove <hook>)]
   slack send (<message> [<hook>])
   slack -h | --help
   slack --version

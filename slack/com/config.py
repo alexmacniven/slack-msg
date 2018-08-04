@@ -30,24 +30,19 @@ class Config(Base):
         4) Writes the configuration to the console
 
         """
-        # Set up a new `config.json` if flag is passed
-        if self.options["--setup"]:
-            new_config()
-            self.config = load_config()
-
         # Either add or remove hooks (not allowing both)
         if self.options["--add"]:
             self.add_hook()
         elif self.options["--remove"]:
             self.remove_hook()
-
-        # Write the configuration to the console
-        print("\nConfigurations\n{0}".format("=" * len("Configurations")))
-        for key, val in self.config.items():
-            print("\n{0}\n{1}".format(key, "-" * len(key)))
-            for k, v in val.items():
-                print("{0} : {1}".format(k, v))
-        print("")
+        else:
+            # Write the configuration to the console
+            print("\nConfigurations\n{0}".format("=" * len("Configurations")))
+            for key, val in self.config.items():
+                print("\n{0}\n{1}".format(key, "-" * len(key)))
+                for k, v in val.items():
+                    print("{0} : {1}".format(k, v))
+            print("")
 
     def add_hook(self):
         """Adds a hook to configuration"""
@@ -61,7 +56,7 @@ class Config(Base):
 
     def remove_hook(self):
         """Removes a hook from configuration
-        
+
         Raises:
             KeyError: When the supplied hook name doesn't exist
 
