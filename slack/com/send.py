@@ -5,7 +5,7 @@ Implements the send module
 """
 import requests
 
-from .base import Base, load_config
+from .base import Base, load_config, confpath
 
 headers = {
     'Content-type': "application/json"
@@ -48,7 +48,7 @@ def send(msg, *args):
         hook: (Optional) A hook to use when sending
     """
     # Load the configuration file
-    config = load_config()
+    config = load_config(confpath)
     # If any optional args have been supplied; try to link them to a hook
     # in the configuration file. Else just use the default
     if args:

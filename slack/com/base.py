@@ -7,8 +7,6 @@ Implements the Base class
 import json
 import os
 
-import json
-import os
 
 here = os.path.dirname(os.path.abspath(__file__))
 """str: Current location"""
@@ -20,7 +18,7 @@ defpath = os.path.join(here, "docs", "default_config.json")
 appdata = os.path.join(os.environ["APPDATA"], "slack-msg")
 """str: Path to AppData"""
 
-jpath = os.path.join(appdata, "config.json")
+confpath = os.path.join(appdata, "config.json")
 """str: Path to `config.json`"""
 
 # Create 'appdata' if it doesn't exist
@@ -50,23 +48,18 @@ class Base(object):
         self.options = options
         self.args = args
         self.kwargs = kwargs
-        if os.path.isfile(jpath):
-            self.config = load_config()
-        else:
-            new_config()
-            self.config = load_config()
 
     def run(self):
         raise NotImplementedError
 
 
-def load_config():
+def load_config(path):
     """References a loaded configuration file with self.config"""
-    with open(jpath) as jfile:
+    with open(path) as jfile:
         return json.load(jfile)
 
 
-def save_config(config):
+def save_config(path, config):
     """Saves the configuration
 
     Infact it dumps the supplied configuration at the location
@@ -78,17 +71,5 @@ def save_config(config):
         config: A configuration
 
     """
-    with open(jpath, "w") as jfile:
+    with open(path, "w") as jfile:
         json.dump(config, jfile)
-
-
-def new_config():
-    """Creates a new configuration from the default
-
-    Opens the default json configuration and invokes base.save_config
-
-    """
-    with open(defpath) as deffile:
-        def_config = json.load(deffile)
-    config = def_config
-    save_config(config)

@@ -3,7 +3,7 @@
 Implements the Config class
 """
 
-from .base import Base, new_config, save_config, load_config
+from .base import Base, save_config, load_config, confpath
 
 
 class Config(Base):
@@ -30,42 +30,40 @@ class Config(Base):
         4) Writes the configuration to the console
 
         """
+        hook = self.options["<hook>"][0]
+        config = load_config(confpath)
         # Either add or remove hooks (not allowing both)
         if self.options["--add"]:
-            self.add_hook()
+            url = self.options["<url>"][0]
+            self.add_hook(config, hook, url)
         elif self.options["--remove"]:
-            self.remove_hook()
+            self.remove_hook(config, hook)
         else:
             # Write the configuration to the console
             print("\nConfigurations\n{0}".format("=" * len("Configurations")))
-            for key, val in self.config.items():
+            for key, val in config.items():
                 print("\n{0}\n{1}".format(key, "-" * len(key)))
                 for k, v in val.items():
                     print("{0} : {1}".format(k, v))
             print("")
 
-    def add_hook(self):
+    def add_hook(self, config, hook, url):
         """Adds a hook to configuration"""
         # TODO: Some input validation needed
-        hook = self.options["<hook>"][0]
-        url = self.options["<url>"][0]
-        self.config["hooks"][hook] = url
+        config["hooks"][hook] = url
         print("Added hook {0}".format(hook))
-        save_config(self.config)
-        self.config = load_config()
+        save_config(confpath, config)
 
-    def remove_hook(self):
+    def remove_hook(self, config, hook):
         """Removes a hook from configuration
 
         Raises:
             KeyError: When the supplied hook name doesn't exist
 
         """
-        hook = self.options["<hook>"][0]
         try:
-            self.config["hooks"].pop(hook)
-            save_config(self.config)
-            self.config = load_config()
+            config["hooks"].pop(hook)
+            save_config(confpath, config)
             print("hook {0} has been removed".format(hook))
         except KeyError:
             print("hook {0} doesn't exist".format(hook))
