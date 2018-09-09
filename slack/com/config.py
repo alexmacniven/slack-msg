@@ -30,13 +30,14 @@ class Config(Base):
         4) Writes the configuration to the console
 
         """
-        hook = self.options["<hook>"][0]
         config = load_config(confpath)
         # Either add or remove hooks (not allowing both)
         if self.options["--add"]:
-            url = self.options["<url>"][0]
+            url = self.options["<url>"]
+            hook = self.options["<hook>"][0]
             self.add_hook(config, hook, url)
         elif self.options["--remove"]:
+            hook = self.options["<hook>"]
             self.remove_hook(config, hook)
         else:
             # Write the configuration to the console
