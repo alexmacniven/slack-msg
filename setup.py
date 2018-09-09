@@ -33,7 +33,7 @@ class InitializeCommand(Command):
     description = "Initializes the module on the host"
     user_options = []
 
-    def initialise_options(self):
+    def initialize_options(self):
         pass
 
     def finalize_options(self):
@@ -82,7 +82,7 @@ setup(
         "Programming Language :: Python :: 3.6",
     ],
     # Support for $ setup.py init
-    cmd_class={
+    cmdclass={
         "init": InitializeCommand
     }
 )
