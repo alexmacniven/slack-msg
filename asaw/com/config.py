@@ -2,7 +2,7 @@
 
 Implements the Config class
 """
-
+import os
 from .base import Base, save_config, load_config, confpath
 
 
@@ -40,13 +40,7 @@ class Config(Base):
             hook = self.options["<hook>"]
             self.remove_hook(config, hook)
         else:
-            # Write the configuration to the console
-            print("\nConfigurations\n{0}".format("=" * len("Configurations")))
-            for key, val in config.items():
-                print("\n{0}\n{1}".format(key, "-" * len(key)))
-                for k, v in val.items():
-                    print("{0} : {1}".format(k, v))
-            print("")
+            os.system(confpath)
 
     def add_hook(self, config, hook, url):
         """Adds a hook to configuration"""

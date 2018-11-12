@@ -1,29 +1,16 @@
-"""
-slack-msg.com.base
-
-Implements the Base class
-"""
-
-import json
 import os
+
+import toml
 
 
 here = os.path.dirname(os.path.abspath(__file__))
 """str: Current location"""
 
-defpath = os.path.join(here, "docs", "default_config.json")
-"""str: Path to the default configuration json file"""
-
-# TODO: Auto-detect OS; if on Linux use ~\.slack-msg
-appdata = os.path.join(os.environ["APPDATA"], "slack-msg")
+appdata = os.path.join(os.environ["APPDATA"], "slackli")
 """str: Path to AppData"""
 
-confpath = os.path.join(appdata, "config.json")
+confpath = os.path.join(appdata, "config.toml")
 """str: Path to `config.json`"""
-
-# Create 'appdata' if it doesn't exist
-if not os.path.isdir(appdata):
-    os.makedirs(appdata)
 
 
 class Base(object):
@@ -55,8 +42,8 @@ class Base(object):
 
 def load_config(path):
     """References a loaded configuration file with self.config"""
-    with open(path) as jfile:
-        return json.load(jfile)
+    with open(path) as f:
+        return toml.load(f)
 
 
 def save_config(path, config):
@@ -71,5 +58,5 @@ def save_config(path, config):
         config: A configuration
 
     """
-    with open(path, "w") as jfile:
-        json.dump(config, jfile)
+    with open(path, "w") as f:
+        toml.dump(config, f)

@@ -1,26 +1,26 @@
 """
-slack
+asaw
 
 Usage:
-  slack config [(--add <hook> <url>)] [(--remove <hook>)]
-  slack send (<message> [<hook>])
-  slack -h | --help
-  slack --version
+  asaw config [(--add <hook> <url>)] [(--remove <hook>)]
+  asaw send (<message> [<hook>])
+  asaw -h | --help
+  asaw --version
 
 Options:
-  -h --help                    Show this screen
-  --version                    Show version
+  -h --help                          Show this screen
+  --version                          Show version
 
 Examples:
-  slack config                 Displays the current config
-  slack --add <hook> <url>     Adds a hook named <hook> with <url>
-  slack --remove <hook>        Removes the hook named <hook>
-  slack send <message>         Sends a message to 'default'
-  slack send <message> <hook>  Sends a message using the hook <hook>
+  asaw config                        Displays the current config
+  asaw config --add <hook> <url>     Adds a hook named <hook> with <url>
+  asaw config --remove <hook>        Removes the hook named <hook>
+  asaw send <message>                Sends a message to 'default'
+  asaw send <message> <hook>         Sends a message using the hook <hook>
 
 Help:
   For help using this tool, please open an issue on the repository:
-  https://github.com/alexmacniven/slack-msg/issues
+  https://github.com/alexmacniven/asaw/issues
 """
 
 import inspect
@@ -32,7 +32,7 @@ def main():
     """Entry to the CLI"""
     # Import the commands and let docopt parse the options and args
     # from the CLI.
-    import slack.com as com
+    import asaw.com as com
     options = docopt(__doc__, version=__version__)
     # Each option has passed has the name of the option as 'key' and
     # whether it was passed (true/false) as 'val'.

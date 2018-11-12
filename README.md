@@ -1,44 +1,52 @@
-# slack-msg
+# Another Slack API Wrapper (asaw)
 
-slack-msg is a Python wrapper for sending messages to your slack channels.
+Use Another Slack API Wrapper for sending messages to your slack channels.
+
+It's written in Python.
 
 Use it in your own code:
 
 ```python
-import slack-msg as slack
+import asaw
 
-slack.send("Clear for takeoff")
+asaw.send("Clear for takeoff")
 ```
 
 As well as straight from the console:
 ```bash
-$ slack send "Clear for takeoff"
+$ asaw send "Clear for takeoff"
 ```
 
-slack-msg also supports multiple channels:
+asaw supports multiple channels:
 
 ```bash
-$ slack send "Clear for takeoff" "status"
-$ slack send "Abort mission!" "errors"
+$ asaw send "Clear for takeoff" "status"
+$ asaw send "Abort mission!" "errors"
 ```
 
 All stored in a handy config file:
 
 ```bash
-$ slack config
-
-Configurations
-==============
-
-hooks
------
-default : https://hooks.slack.com/...
-status : https://hooks.slack.com/...
-errors: https://hooks.slack.com/...
+[hooks]
+default = "https://hooks.slack.com/..."
+status = "https://hooks.slack.com/..."
+errors =  "https://hooks.slack.com/..."
 ```
 
 ## Installation
 
-1) Clone the repository
-2) Build the source `$ python setup.py build`
-3) Install `$ python setup.py install`
+### pip(env)
+
+`$ pip(env) install asaw`
+
+## Setup
+
+Setup a config file;
+
+`$ asaw install`
+
+You'll be prompted to supply a default hook
+
+Additional hooks can be supplied via;
+
+`$ asaw config --add [hook_name] [hook_url]` 
